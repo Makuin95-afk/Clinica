@@ -1,5 +1,4 @@
 from flask import Flask, request, jsonify
-import pyodbc
 
 app = Flask(__name__)
 
