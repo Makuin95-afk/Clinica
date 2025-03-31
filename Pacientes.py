@@ -53,7 +53,7 @@ def agregar_paciente():
     datos = request.json
     consulta = """
         INSERT INTO Paciente (ID_Paciente, Nombre, Apellido, Fecha_Nacimiento, DNI, Direccion, Telefono, Email, Tipo_Sangre, ID_Seguro)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
     """
     parametros = (
         datos['ID_Paciente'], datos['Nombre'], datos['Apellido'], datos['Fecha_Nacimiento'],
