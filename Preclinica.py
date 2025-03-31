@@ -72,4 +72,5 @@ def eliminar_preclinica(id_preclinica):
     return jsonify({"error": "Error de conexión a la base de datos"}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0', port=5000)
+
