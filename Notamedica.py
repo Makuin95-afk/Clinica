@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-
+import mysql.connector
 
 app = Flask(__name__)
 
@@ -19,7 +19,7 @@ def conexionMySQL():
 # Obtener todas las notas médicas
 @app.route('/notas_medicas', methods=['GET'])
 def get_notas_medicas():
-    conexion = conexionSQLServer()
+    conexion = conexionMySQL()
     if conexion:
         cursor = conexion.cursor()
         cursor.execute("SELECT * FROM NotaMedica")
@@ -35,7 +35,7 @@ def add_nota_medica():
     data = request.json
     consulta = "INSERT INTO NotaMedica (ID_Cita, Fecha, Hora, Notas) VALUES (?, ?, ?, ?)"
     parametros = (data['IdCita'], data['Fecha'], data['Hora'], data['Notas'])
-    conexion = conexionSQLServer()
+    conexion = conexionMySQL()
     if conexion:
         cursor = conexion.cursor()
         cursor.execute(consulta, parametros)
@@ -50,7 +50,7 @@ def update_nota_medica(id):
     data = request.json
     consulta = "UPDATE NotaMedica SET ID_Cita = ?, Fecha = ?, Hora = ?, Notas = ? WHERE ID_NotaMedica = ?"
     parametros = (data['IdCita'], data['Fecha'], data['Hora'], data['Notas'], id)
-    conexion = conexionSQLServer()
+    conexion = conexionMySQL()
     if conexion:
         cursor = conexion.cursor()
         cursor.execute(consulta, parametros)
@@ -62,7 +62,7 @@ def update_nota_medica(id):
 # Eliminar una nota médica
 @app.route('/notas_medicas/<int:id>', methods=['DELETE'])
 def delete_nota_medica(id):
-    conexion = conexionSQLServer()
+    conexion = conexionMySQL()
     if conexion:
         cursor = conexion.cursor()
         cursor.execute("DELETE FROM NotaMedica WHERE ID_NotaMedica = ?", (id,))
