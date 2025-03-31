@@ -59,7 +59,7 @@ def crear_cita():
         estado = data['Estado']
 
         parametros = (id_cita, id_paciente, id_medico, id_consultorio, fecha, hora, estado)
-        consulta = "INSERT INTO Cita (ID_Cita, ID_Paciente, ID_Medico, ID_Consultorio, Fecha, Hora, Estado) VALUES (?, ?, ?, ?, ?, ?, ?)"
+        consulta = "INSERT INTO Cita (ID_Cita, ID_Paciente, ID_Medico, ID_Consultorio, Fecha, Hora, Estado) VALUES (%s, %s, %s, %s, %s, %s, %s)"
         ejecutarSQL(consulta, parametros)
         return jsonify({"mensaje": "Registro de cita creado con éxito"}), 201
     except Exception as e:
