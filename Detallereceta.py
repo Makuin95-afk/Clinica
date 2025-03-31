@@ -33,7 +33,7 @@ def get_detalles_receta():
 @app.route('/detallesreceta', methods=['POST'])
 def add_detalle_receta():
     data = request.json
-    consulta = "INSERT INTO DetalleReceta (ID_Receta, ID_Medico, Medicamentos, Indicaciones) VALUES (?, ?, ?, ?)"
+    consulta = "INSERT INTO DetalleReceta (ID_Receta, ID_Medico, Medicamentos, Indicaciones) VALUES (%s, %s, %s, %s)"
     parametros = (data['ID_Receta'], data['ID_Medico'], data['Medicamentos'], data['Indicaciones'])
     conexion = conexionMySQL()
     if conexion:
