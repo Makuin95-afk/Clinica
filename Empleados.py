@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-
+import mysql.connector
 
 app = Flask(__name__)
 
@@ -19,7 +19,7 @@ def conexionMySQL():
 # Obtener todos los empleados
 @app.route('/empleados', methods=['GET'])
 def get_empleados():
-    conexion = conexionSQLServer()
+    conexion = conexionMySQL()
     if conexion:
         cursor = conexion.cursor()
         cursor.execute("SELECT * FROM Empleado")
@@ -39,7 +39,7 @@ def add_employee():
         data['EmpEmail'], data['EmpIDPuesto']
     )
     consulta = "INSERT INTO Empleado (ID_Empleado, Nombre, Apellido, DNI, Direccion, Telefono, Email, ID_Puesto) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
-    conexion = conexionSQLServer()
+    conexion = conexionMySQL()
     if conexion:
         cursor = conexion.cursor()
         cursor.execute(consulta, emp_data)
@@ -58,7 +58,7 @@ def update_employee(id):
         data['EmpDir'], data['EmpTel'], data['EmpEmail'],
         data['EmpIDPuesto'], id
     )
-    conexion = conexionSQLServer()
+    conexion = conexionMySQL()
     if conexion:
         cursor = conexion.cursor()
         cursor.execute(consulta, emp_data)
@@ -70,7 +70,7 @@ def update_employee(id):
 # Eliminar un empleado
 @app.route('/empleados/<int:id>', methods=['DELETE'])
 def delete_employee(id):
-    conexion = conexionSQLServer()
+    conexion = conexionMySQL()
     if conexion:
         cursor = conexion.cursor()
         cursor.execute("DELETE FROM Empleado WHERE ID_Empleado = ?", (id,))
