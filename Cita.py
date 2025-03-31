@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+import mysql.connector
 import datetime
 
 app = Flask(__name__)
@@ -18,7 +19,7 @@ def conexionMySQL():
 
 # Función para ejecutar SQL
 def ejecutarSQL(consulta, parametros=None, recibir_datos=False):
-    conexion = conexionSQLServer()
+    conexion = conexionMySQL()
     if conexion:
         with conexion:
             cursor = conexion.cursor()
