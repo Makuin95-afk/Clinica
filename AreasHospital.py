@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-
+import mysql.connector
 
 app = Flask(__name__)
 
@@ -19,7 +19,7 @@ def conexionMySQL():
 # Obtener todos los registros de área hospitalaria
 @app.route('/areas', methods=['GET'])
 def get_areas():
-    conexion = conexionSQLServer()
+    conexion = conexionMySQL()
     if conexion:
         cursor = conexion.cursor()
         cursor.execute("SELECT * FROM AreaHospital")
@@ -38,7 +38,7 @@ def add_area():
         data['NombreArea'], data['Descripcion']
     )
     consulta = "INSERT INTO AreaHospital (ID_Area, ID_Consultorio, Nombre_Area, Descripcion) VALUES (?, ?, ?, ?)"
-    conexion = conexionSQLServer()
+    conexion = conexionMySQL()
     if conexion:
         cursor = conexion.cursor()
         cursor.execute(consulta, area_data)
@@ -55,7 +55,7 @@ def update_area(id):
     area_data = (
         data['IdConsultorio'], data['NombreArea'], data['Descripcion'], id
     )
-    conexion = conexionSQLServer()
+    conexion = conexionMySQL()
     if conexion:
         cursor = conexion.cursor()
         cursor.execute(consulta, area_data)
@@ -67,7 +67,7 @@ def update_area(id):
 # Eliminar un registro de área hospitalaria
 @app.route('/areas/<int:id>', methods=['DELETE'])
 def delete_area(id):
-    conexion = conexionSQLServer()
+    conexion = conexionMySQL()
     if conexion:
         cursor = conexion.cursor()
         cursor.execute("DELETE FROM AreaHospital WHERE ID_Area = ?", (id,))
