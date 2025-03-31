@@ -37,7 +37,7 @@ def agregar_preclinica():
     conexion = conexionMySQL()
     if conexion:
         cursor = conexion.cursor()
-        consulta = "INSERT INTO Preclinica (Id_Preclinica, Id_Consultorio, Id_Paciente, Fecha, Hora, Sintomas, Temperatura, Presion, Peso) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
+        consulta = "INSERT INTO Preclinica (Id_Preclinica, Id_Consultorio, Id_Paciente, Fecha, Hora, Sintomas, Temperatura, Presion, Peso) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
         cursor.execute(consulta, (datos['Id_Preclinica'], datos['Id_Consultorio'], datos['Id_Paciente'], datos['Fecha'], datos['Hora'], datos['Sintomas'], datos['Temperatura'], datos['Presion'], datos['Peso']))
         conexion.commit()
         conexion.close()
