@@ -10,7 +10,7 @@ def conexionMySQL():
         conexion = mysql.connector.connect(
             host='localhost',  # Cambia esto si tu base de datos no está en localhost
             user='root',  # Usuario de MySQL
-            password='ujcv2025',  # Contraseña de MySQL
+            password='Ujcv2025@',  # Contraseña de MySQL
             database='ClinicaHospitalariaH'  # Nombre de la base de datos
         )
         return conexion
