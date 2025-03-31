@@ -36,7 +36,7 @@ def ejecutarSQL(consulta, parametros=None, recibir_datos=False):
 @app.route('/tipo_examen', methods=['POST'])
 def crear_tipo_examen():
     datos = request.json
-    consulta = "INSERT INTO TipoExamen (ID_Tipo_Examen, Descripcion) VALUES (?, ?)"
+    consulta = "INSERT INTO TipoExamen (ID_Tipo_Examen, Descripcion) VALUES (%s, %s)"
     parametros = (datos['ID_Tipo_Examen'], datos['Descripcion'])
     if ejecutarSQL(consulta, parametros):
         return jsonify({'mensaje': 'Tipo de examen creado exitosamente'}), 201
