@@ -33,7 +33,7 @@ def get_notas_medicas():
 @app.route('/notas_medicas', methods=['POST'])
 def add_nota_medica():
     data = request.json
-    consulta = "INSERT INTO NotaMedica (ID_Cita, Fecha, Hora, Notas) VALUES (?, ?, ?, ?)"
+    consulta = "INSERT INTO NotaMedica (ID_Cita, Fecha, Hora, Notas) VALUES (%s, %s, %s, %s)"
     parametros = (data['IdCita'], data['Fecha'], data['Hora'], data['Notas'])
     conexion = conexionMySQL()
     if conexion:
