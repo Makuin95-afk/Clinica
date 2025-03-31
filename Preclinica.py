@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-
+import mysql.connector
 
 app = Flask(__name__)
 
@@ -19,7 +19,7 @@ def conexionMySQL():
 # Obtener todas las consultas preclínicas
 @app.route('/preclinica', methods=['GET'])
 def obtener_preclinica():
-    conexion = conexionSQLServer()
+    conexion = conexionMySQL()
     if conexion:
         cursor = conexion.cursor()
         cursor.execute("SELECT * FROM Preclinica")
@@ -34,7 +34,7 @@ def obtener_preclinica():
 @app.route('/preclinica', methods=['POST'])
 def agregar_preclinica():
     datos = request.json
-    conexion = conexionSQLServer()
+    conexion = conexionMySQL()
     if conexion:
         cursor = conexion.cursor()
         consulta = "INSERT INTO Preclinica (Id_Preclinica, Id_Consultorio, Id_Paciente, Fecha, Hora, Sintomas, Temperatura, Presion, Peso) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
@@ -48,7 +48,7 @@ def agregar_preclinica():
 @app.route('/preclinica/<int:id_preclinica>', methods=['PUT'])
 def actualizar_preclinica(id_preclinica):
     datos = request.json
-    conexion = conexionSQLServer()
+    conexion = conexionMySQL()
     if conexion:
         cursor = conexion.cursor()
         consulta = "UPDATE Preclinica SET Id_Consultorio = ?, Id_Paciente = ?, Fecha = ?, Hora = ?, Sintomas = ?, Temperatura = ?, Presion = ?, Peso = ? WHERE Id_Preclinica = ?"
@@ -61,7 +61,7 @@ def actualizar_preclinica(id_preclinica):
 # Eliminar una consulta preclínica
 @app.route('/preclinica/<int:id_preclinica>', methods=['DELETE'])
 def eliminar_preclinica(id_preclinica):
-    conexion = conexionSQLServer()
+    conexion = conexionMySQL()
     if conexion:
         cursor = conexion.cursor()
         consulta = "DELETE FROM Preclinica WHERE Id_Preclinica = ?"
