@@ -44,7 +44,7 @@ def obtener_recetas():
 @app.route('/recetas', methods=['POST'])
 def crear_receta():
     datos = request.json
-    consulta = "INSERT INTO Receta (ID_Receta, ID_Paciente, ID_Medico, Fecha) VALUES (?, ?, ?, ?)"
+    consulta = "INSERT INTO Receta (ID_Receta, ID_Paciente, ID_Medico, Fecha) VALUES (%s, %s, %s, %s)"
     parametros = (datos['ID_Receta'], datos['ID_Paciente'], datos['ID_Medico'], datos['Fecha'])
     ejecutarSQL(consulta, parametros)
     return jsonify({"mensaje": "Receta creada exitosamente"})
