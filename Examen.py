@@ -45,7 +45,7 @@ def obtener_examenes():
 @app.route('/examenes', methods=['POST'])
 def crear_examen():
     datos = request.json
-    consulta = "INSERT INTO Examenes (ID_Examen, ID_Paciente, ID_Area, ID_Consultorio, Fecha, Hora, Resultados) VALUES (?, ?, ?, ?, ?, ?, ?)"
+    consulta = "INSERT INTO Examenes (ID_Examen, ID_Paciente, ID_Area, ID_Consultorio, Fecha, Hora, Resultados) VALUES (%s, %s, %s, %s, %s, %s, %s)"
     parametros = (datos['ID_Examen'], datos['ID_Paciente'], datos['ID_Area'], datos['ID_Tipo_Examen'], datos['Fecha'], datos['Hora'], datos['Resultados'])
     ejecutarSQL(consulta, parametros)
     return jsonify({'mensaje': 'Examen creado exitosamente'}), 201
