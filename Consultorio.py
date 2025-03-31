@@ -33,7 +33,7 @@ def get_consultorios():
 @app.route('/consultorios', methods=['POST'])
 def add_consultorio():
     data = request.json
-    consulta = "INSERT INTO Consultorio (ID_Consultorio, Nombre, Ubicacion) VALUES (?, ?, ?)"
+    consulta = "INSERT INTO Consultorio (ID_Consultorio, Nombre, Ubicacion) VALUES (%s, %s, %s)"
     parametros = (data['ID_Consultorio'], data['Nombre'], data['Ubicacion'])
     conexion = conexionMySQL()
     if conexion:
