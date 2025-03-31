@@ -38,7 +38,7 @@ def add_employee():
         data['EmpDNI'], data['EmpDir'], data['EmpTel'],
         data['EmpEmail'], data['EmpIDPuesto']
     )
-    consulta = "INSERT INTO Empleado (ID_Empleado, Nombre, Apellido, DNI, Direccion, Telefono, Email, ID_Puesto) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
+    consulta = "INSERT INTO Empleado (ID_Empleado, Nombre, Apellido, DNI, Direccion, Telefono, Email, ID_Puesto) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
     conexion = conexionMySQL()
     if conexion:
         cursor = conexion.cursor()
