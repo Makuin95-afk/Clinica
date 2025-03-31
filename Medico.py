@@ -38,7 +38,7 @@ def add_medico():
         data['MedIDEspecialidad'], data['MedTel'], data['MedEmail'],
         data['MedDir'], data['MedNumLic']
     )
-    consulta = "INSERT INTO Medico (ID_Medico, Nombre, Apellido, ID_Especialidad, Telefono, Email, Direccion, Numero_Licencia) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
+    consulta = "INSERT INTO Medico (ID_Medico, Nombre, Apellido, ID_Especialidad, Telefono, Email, Direccion, Numero_Licencia) VALUES (%s, %s, %s, %s, %s, %s, %s, %s,)"
     conexion = conexionMySQL()
     if conexion:
         cursor = conexion.cursor()
