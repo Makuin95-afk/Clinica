@@ -37,7 +37,7 @@ def add_area():
         data['IdArea'], data['IdConsultorio'],
         data['NombreArea'], data['Descripcion']
     )
-    consulta = "INSERT INTO AreaHospital (ID_Area, ID_Consultorio, Nombre_Area, Descripcion) VALUES (?, ?, ?, ?)"
+    consulta = "INSERT INTO AreaHospital (ID_Area, ID_Consultorio, Nombre_Area, Descripcion) VALUES (%s, %s, %s, %s)"
     conexion = conexionMySQL()
     if conexion:
         cursor = conexion.cursor()
